@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flames</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: url('1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color:#333;
+    max-width:420px;
+    margin:40px auto;
+    padding:0 20px;
+    text-align:center;
+  }
+  h1 {
+    color:#ff66a3;
+    font-size:8rem;
+    margin-bottom:-30px;
+    
+    
+    
+  }
+  input {
+    width:150%;
+    padding:20px;
+    margin:12px 0;
+    border:4px solid #ffb3d9;
+    border-radius:16px;
+    background:#fff;
+    color:#333;
+    font-size:2rem;
+    margin-left:-100px;
+    
+  }
+  button {
+    background:#ff66a3;
+    color:#fff;
+    border:none;
+    padding:24px 48px;
+    font-size:2.2rem;
+    border-radius:16px;
+    cursor:pointer;
+    margin-top:24px;
+    transition:0.4s;
+    margin-left:40px
+    
+  }
+  button:hover {
+    background:#ff4d88;
+    
+  }
+  #result {
+    margin-top:40px;
+    font-size:2.8rem;
+    font-weight:bold;
+    color:#ff3399;
+    
+  }
+  
+  
+  h3 {
+    color:grey;
+    font-size:1.8rem;
+    margin-bottom:20px;
+    margin-left:414px;
+    
+  }
+
+  
+
+  h4 {
+    font-size:1.12rem;
+    margin-top:1100px;
+    color:grey;
+    margin-left:50px;
+  }
+</style>
+</head>
+<title>Flames</title>
+<body>
+<h1>FLAMES</h1>
+  <h3>by <a href="https://www.instagram.com/_.dhe._.x_07?igsh=cHQ1MzFmNnYydTVs">_.dhe._.X_07</a></h3>
+<input id="name1" placeholder="Boy's Name"><br>
+<input id="name2" placeholder="Girl's name"><br>
+<button onclick="playFlames()">Check</button>
+<div id="result"></div>
+<h4>The Game Flames is not true .This is a game completely designed for fun. So don't take it serious</h4>
+
+<script>
+function playFlames() {
+  const a = nameToArray(document.getElementById('name1').value);
+  const b = nameToArray(document.getElementById('name2').value);
+  if (!a.length || !b.length) return;
+
+  const common = removeCommon([...a], [...b]);
+  const count = common.length;
+  if (count === 0) {
+    document.getElementById('result').textContent = 'Both names are the same!!';
+    return;
+  }
+
+  const flames = ['F','L','A','M','E','S'];
+  let idx = 0;
+  while (flames.length > 1) {
+    idx = (idx + count - 1) % flames.length;
+    flames.splice(idx, 1);
+  }
+  const outcome = {
+    F: 'Friends',
+    L: 'Love',
+    A: 'Affection',
+    M: 'Marriage',
+    E: 'Enemies',
+    S: 'Siblings'
+  }[flames[0]];
+  document.getElementById('result').textContent = outcome;
+}
+
+function nameToArray(name) {
+  return name.toLowerCase().replace(/[^a-z]/g, '').split('');
+}
+
+function removeCommon(arr1, arr2) {
+  for (let i = arr1.length - 1; i >= 0; i--) {
+    const pos = arr2.indexOf(arr1[i]);
+    if (pos !== -1) {
+      arr1.splice(i, 1);
+      arr2.splice(pos, 1);
+    }
+  }
+  return arr1.concat(arr2);
+}
+</script>
